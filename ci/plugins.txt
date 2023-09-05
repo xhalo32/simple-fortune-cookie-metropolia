@@ -1,3 +1,4 @@
+configuration-as-code:latest
 robot:latest
 git:latest
 ssh-slaves:latest
@@ -12,7 +13,6 @@ pipeline-model-api:latest
 matrix-auth:latest
 font-awesome-api:latest
 workflow-job:latest
-snakeyaml-api:latest
 workflow-support:latest
 trilead-api:latest
 structs:latest
@@ -91,4 +91,3 @@ workflow-basic-steps:latest
 echarts-api:latest
 scm-api:latest
 workflow-api:latest
-configuration-as-code:latest

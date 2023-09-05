@@ -77,21 +77,21 @@ Vagrant.configure("2") do |config|
      apt-get install -y docker-ce
      usermod -a -G docker vagrant
      # install docker-compose
-     mkdir -p /home/vagrant/.docker/cli-plugins/
-     TMPFILE=$(mktemp)
-     http_code=$(curl -SL -w "%{http_code}" https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o "$TMPFILE")
-     [[ "$http_code" == "200" ]] || { rm "$TMPFILE"; echo "Curl failed with $http_code"; exit 1; }
-     mv "$TMPFILE" /home/vagrant/.docker/cli-plugins/docker-compose
-     chmod +x /home/vagrant/.docker/cli-plugins/docker-compose
-     ln -s /home/vagrant/.docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+     if ! command -v docker-compose >/dev/null 2>&1; then
+      echo "docker-compose is not installed."
+      mkdir -p /home/vagrant/.docker/cli-plugins/
+      TMPFILE=$(mktemp)
+      http_code=$(curl -SL -w "%{http_code}" https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o "$TMPFILE")
+      [[ "$http_code" == "200" ]] || { rm "$TMPFILE"; echo "Curl failed with $http_code"; exit 1; }
+      mv "$TMPFILE" /home/vagrant/.docker/cli-plugins/docker-compose
+      chmod +x /home/vagrant/.docker/cli-plugins/docker-compose
+      ln -s /home/vagrant/.docker/cli-plugins/docker-compose /usr/local/bin/docker-compose 
+     fi
      # setup needed items for jenkins
      cp /home/vagrant/project/ci/sshd_config /etc/ssh/sshd_config # don't do this in real environment
      systemctl restart ssh
-     apt-get install openjdk-11-jdk
+     apt-get install -y openjdk-11-jdk
      mkdir -p /var/jenkins
      chown -R vagrant:vagrant /var/jenkins
-     mkdir -p /var/casc
-     chown -R vagrant:vagrant /var/casc
-     cp /home/vagrant/project/ci/jenkins.yaml /var/casc/jenkins.yaml
   SHELL
 end

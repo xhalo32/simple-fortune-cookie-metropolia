@@ -1,5 +1,4 @@
-FROM jenkins/jenkins:2.366
-
+FROM jenkins/jenkins:2.414.1
 USER root
 RUN apt-get update && apt-get install -y --assume-yes \
     build-essential make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip openssh-client \
