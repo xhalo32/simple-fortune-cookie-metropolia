@@ -8,7 +8,7 @@ RUN apt-get clean
 RUN service ssh start
 RUN cp -r /usr/local/go/bin/. /usr/bin
 
-COPY ./id_ed25519.pub /root/.ssh/
+COPY ./secrets/id_ed25519.pub /root/.ssh/
 RUN cp /root/.ssh/id_ed25519.pub /root/.ssh/authorized_keys
 
 EXPOSE 22

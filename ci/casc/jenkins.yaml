@@ -6,7 +6,7 @@ credentials:
           id: "ssh_id"
           privateKeySource:
             directEntry:
-              privateKey: "${readFile:/tmp/id_ed25519}"
+              privateKey: "${readFile:/var/lib/secrets/id_ed25519}"
           scope: GLOBAL
           username: "root"
 
