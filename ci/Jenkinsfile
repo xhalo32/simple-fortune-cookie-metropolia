@@ -6,10 +6,9 @@ pipeline {
         GO111MODULE = 'on'
     }
     stages {
-        stage('Compile') {
+        stage('Compile frontend') {
             steps {
-                sh 'hostname && ls'
-                sh 'go build'
+                sh 'go build frontend'
             }
         }
     }
