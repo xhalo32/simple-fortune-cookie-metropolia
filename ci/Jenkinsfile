@@ -7,23 +7,21 @@ pipeline {
   }
   stages {
     stage('Build') {
-      steps {
-        parallel {
-          stage('Frontend') {
-            steps {
+      parallel {
+        stage('Frontend') {
+          steps {
             sh """
                 cd frontend
                 go build
                 """
-            }
           }
-          stage('Frontend') {
-            steps {
+        }
+        stage('Frontend') {
+          steps {
             sh """
                 cd backend
                 go build
                 """
-            }
           }
         }
       }
