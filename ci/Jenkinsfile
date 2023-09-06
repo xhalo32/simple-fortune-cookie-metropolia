@@ -1,15 +1,27 @@
 pipeline {
-    agent {
-          label 'build'
-    }
-    environment {
-        GO111MODULE = 'on'
-    }
-    stages {
-        stage('Compile frontend') {
-            steps {
-                sh 'go build frontend'
-            }
+  agent {
+    label 'build'
+  }
+  environment {
+    GO111MODULE = 'on'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        parallel {
+          frontend: {
+            sh """
+                cd frontend
+                go build
+                """
+          }
+          backend: {
+            sh """
+                cd backend
+                go build
+                """
+          }
         }
+      }
     }
-}
+  }
