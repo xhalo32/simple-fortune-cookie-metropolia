@@ -8,20 +8,24 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        parallel(
-          frontend: {
+        parallel {
+          stage('Frontend') {
+            steps {
             sh """
                 cd frontend
                 go build
                 """
+            }
           }
-          backend: {
+          stage('Frontend') {
+            steps {
             sh """
                 cd backend
                 go build
                 """
+            }
           }
-        )
+        }
       }
     }
   }
