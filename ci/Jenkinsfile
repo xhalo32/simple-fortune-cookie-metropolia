@@ -16,7 +16,7 @@ pipeline {
                 """
           }
         }
-        stage('Frontend') {
+        stage('Backend') {
           steps {
             sh """
                 cd backend
