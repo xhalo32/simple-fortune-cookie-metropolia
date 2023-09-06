@@ -6,21 +6,23 @@ pipeline {
     GO111MODULE = 'on'
   }
   stages {
-    parallel {
-      stage('Frontend') {
-        steps {
-          sh """
+    stage('Build') {
+      parallel {
+        stage('Frontend') {
+          steps {
+            sh """
                 cd frontend
                 go build
                 """
+          }
         }
-      }
-      stage('Frontend') {
-        steps {
-          sh """
+        stage('Frontend') {
+          steps {
+            sh """
                 cd backend
                 go build
                 """
+          }
         }
       }
     }
